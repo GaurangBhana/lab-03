@@ -2,6 +2,7 @@ package com.example.listycitylab3;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -12,7 +13,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import java.util.ArrayList;
 import java.util.Arrays;
 
-public class MainActivity extends AppCompatActivity implements AddCityFragment.AddCityDialogListener {
+public class MainActivity extends AppCompatActivity implements AddCityFragment.AddCityDialogListener, EditCityFragment.EditCityDialogListener {
 
     private ArrayList<City> dataList;
     private ListView cityList;
@@ -21,6 +22,11 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
     @Override
     public void addCity(City city){
         cityAdapter.add(city);
+        cityAdapter.notifyDataSetChanged();
+    }
+
+    public void editCity(int position, City city){
+        dataList.set(position, city);
         cityAdapter.notifyDataSetChanged();
     }
 
@@ -58,6 +64,13 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
             @Override
             public void onClick(View v){
                 new AddCityFragment().show(getSupportFragmentManager(), "Add City");
+            }
+        });
+
+        cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id){
+                new EditCityFragment(position).show(getSupportFragmentManager(), "Edit City");
             }
         });
     }
