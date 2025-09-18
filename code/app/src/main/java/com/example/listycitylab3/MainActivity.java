@@ -70,7 +70,8 @@ public class MainActivity extends AppCompatActivity implements AddCityFragment.A
         cityList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id){
-                new EditCityFragment(position).show(getSupportFragmentManager(), "Edit City");
+                new EditCityFragment(position, cityAdapter.getItem(position)).show(getSupportFragmentManager(), "Edit City");
+
             }
         });
     }

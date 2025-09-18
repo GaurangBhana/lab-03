@@ -15,13 +15,15 @@ import androidx.fragment.app.DialogFragment;
 
 public class EditCityFragment extends DialogFragment {
     int position;
+    City city;
     interface EditCityDialogListener {
         void editCity(int position, City city);
     }
 
-    EditCityFragment(int position){
+    EditCityFragment(int position, City city){
         super();
         this.position = position;
+        this.city = city;
     }
 
     private EditCityFragment.EditCityDialogListener listener;
@@ -43,6 +45,8 @@ public class EditCityFragment extends DialogFragment {
         View view = LayoutInflater.from(getContext()).inflate(R.layout.fragment_edit_city, null);
         EditText editCityText = view.findViewById(R.id.edit_text_city_text);
         EditText editProvinceText = view.findViewById(R.id.edit_text_province_text);
+        editCityText.setText(this.city.getName());
+        editProvinceText.setText(this.city.getProvince());
         AlertDialog.Builder builder = new AlertDialog.Builder(getContext());
         return builder
                 .setView(view)
