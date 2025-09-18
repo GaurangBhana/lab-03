@@ -17,7 +17,7 @@ public class EditCityFragment extends DialogFragment {
     int position;
     City city;
     interface EditCityDialogListener {
-        void editCity(int position, City city);
+        void editCity(int position, String name, String province);
     }
 
     EditCityFragment(int position, City city){
@@ -55,7 +55,7 @@ public class EditCityFragment extends DialogFragment {
                 .setPositiveButton("Edit", (DialogInterface dialog, int which) ->  {
                     String cityName = editCityText.getText().toString();
                     String provinceName = editProvinceText.getText().toString();
-                    listener.editCity(this.position, new City(cityName, provinceName));
+                    listener.editCity(this.position, cityName, provinceName);
                 })
                 .create();
     }
